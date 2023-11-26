@@ -10,7 +10,7 @@ body {
   background-image: url('/public/background/1584720165603.png');
   background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: fixed; /* para fixar o background enquanto a página rola */
+  background-attachment: fixed; /* to fix the background while the page scrolls */
 }
 
 .container {
@@ -23,7 +23,7 @@ body {
   
 }
 
-.container .image {
+.container .logo {
   width: 100%;
   max-width: 800px; /* Increase the max-width value to make the image bigger */
   height: 60%;
@@ -33,3 +33,59 @@ body {
   background-position: center;
   position: relative;
 }
+
+.containerInput {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 15px;
+  width: 70%;
+  margin: 34px 0;
+  display: flex;
+  border-radius: 8px;
+  box-shadow: 1px 3px 8px rgba(0,0,0,0,0.5);
+}
+
+.containerInput input {
+  width: 100%;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  color: #fff;
+  font-size: 20px;
+  outline: none;
+  margin: 8px;
+}
+
+.containerInput input::placeholder {
+  color: #f1f1f1;
+}
+
+.buttonSearch{
+  background-color: transparent;
+  border: 0;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.5s;
+  margin: 8px;
+}
+
+.buttonSearch:hover{
+  transform: scale(1.2);
+}
+
+.buttonShuffle{
+  background-color: transparent;
+  border: 0;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.5s;
+  margin: 8px;
+}
+
+.buttonShuffle:hover{
+  transform: scale(1.2);
+}
+
