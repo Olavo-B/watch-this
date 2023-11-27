@@ -99,4 +99,21 @@ body {
   justify-content: center;
   align-items: center;
 }
+.icons {
+  position: fixed;
+  top: 30px; /* Ajuste conforme necessário */
+  right: 50px; /* Ajuste conforme necessário */
+  margin: 10px; /* Ajuste conforme necessário */
+}
 
+.icons .b1 {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: transform 0.5s;
+  margin: 15px;
+}
+
+.icons .b1:hover{
+  transform: scale(1.2);
+}

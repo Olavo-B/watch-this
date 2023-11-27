@@ -12,6 +12,7 @@ This work proposes a minimalist Web system that allows a user who is undecided a
 | Feature                                                                                                  | Status |
 | -------------------------------------------------------------------------------------------------------- | ------ |
 | Functional search bar                                                                                    |  ✅   |
+| Noturnal mode                                                                                            |  ⏳    |
 | Login page                                                                                               |  ⏳    |
 | Sign up page                                                                                             |  ⏳    |
 | Catalogue page                                                                                           |  ⏳    |
