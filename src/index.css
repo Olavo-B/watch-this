@@ -13,6 +13,7 @@ body {
   background-attachment: fixed; /* to fix the background while the page scrolls */
 }
 
+
 .container {
   width: 100%;
   height: 100vh;

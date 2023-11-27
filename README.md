@@ -7,12 +7,13 @@ This work proposes a minimalist Web system that allows a user who is undecided a
 
 0.5.0
 
-## Features
+## TODO
+
+### Mandatory features
 
 | Feature                                                                                                  | Status |
 | -------------------------------------------------------------------------------------------------------- | ------ |
 | Functional search bar                                                                                    |  ✅   |
-| Noturnal mode                                                                                            |  ⏳    |
 | Login page                                                                                               |  ⏳    |
 | Sign up page                                                                                             |  ⏳    |
 | Catalogue page                                                                                           |  ⏳    |
@@ -23,6 +24,10 @@ This work proposes a minimalist Web system that allows a user who is undecided a
 | Make search engine  - backend                                                                            |  ⏳    |
 | Make database - backend                                                                                  |  ⏳    |
 
+### Optional features
+| Feature                                                                                                  | Status |
+| -------------------------------------------------------------------------------------------------------- | ------ |
+| Noturnal mode with background image change                                                               |  ⏳    |
 
 - ✅ = Ready to use
 - ⏳ = In progress
