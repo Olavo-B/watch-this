@@ -1,39 +1,35 @@
-import { FiHeart, FiLogIn , FiMoon} from 'react-icons/fi'
-import SearchBar from './components/SearchBar';
-import LoginForm from './components/LoginForm';
+import Results from './pages/SearchResult';
+import Login from './pages/LoginForm';
+import Profile from './pages/Profile';
+import Catalog from './pages/Catalog';
+import Home from './pages/Home';
+import { AuthProvider } from "./context/Auth";
+import useAuth from "./hooks/UseAuth";
+import { Routes, Route } from 'react-router-dom';
 
 
 function App() {
 
-  const handleSearch = (searchTerm) => {
-    console.log(`Realizando pesquisa por: ${searchTerm}`);
-    alert(`Realizando pesquisa por: ${searchTerm}`);
-    // Lógica de pesquisa aqui...
+  const Private = ({ Item }) => {
+    const { signed } = useAuth();
+  
+    return signed > 0 ? <Item /> : <Login />;
   };
-
-
-
 
   return (
 
-    <div className="App">
-      <div className="container">
-        <div className="logo"></div>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path='/result' element={<Results />} />
+          <Route path='/profile' element={<Private item={Profile} />} />
+          <Route path='/catalog' element={<Private item={Catalog} />} />
+          <Route path="*" element={<h1>Not Found</h1>} />
+        </Routes>
+      </AuthProvider>
 
-
-        <SearchBar onSearch={handleSearch}/>
-
-      </div>
-
-      {/* <div className="footer">
-        <p>Created with <FiHeart size={10} color='black'/> by <a href="https://github.com/Olavo-B"
-        target="_blank">Olavo-B </a></p>
-      </div> */}
-
-      <div className="icons">
-        <LoginForm/>
-      </div>
-    </div>
+    
   );
 }
 

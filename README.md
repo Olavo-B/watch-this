@@ -27,7 +27,8 @@ This work proposes a minimalist Web system that allows a user who is undecided a
 ### Optional features
 | Feature                                                                                                  | Status |
 | -------------------------------------------------------------------------------------------------------- | ------ |
-| Noturnal mode with background image change                                                               |  ⏳    |
+| Nocturnal mode with background image change                                                              |  ⏳    |
+| Random anime recommendation when clicking on the logo                                                    |  ⏳    |    
 
 - ✅ = Ready to use
 - ⏳ = In progress

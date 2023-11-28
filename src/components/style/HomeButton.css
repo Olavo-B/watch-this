@@ -1,0 +1,13 @@
+
+.homeButton {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    transition: transform 0.5s;
+    margin: 15px;
+
+  }
+  
+  .homeButton:hover{
+    transform: scale(1.2);
+  }
