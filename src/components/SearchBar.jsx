@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { FiSearch, FiShuffle } from 'react-icons/fi';
 import './style/SearchBar.css';
+import useAuth from '../hooks/UseAuth';
 
 const SearchBar = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const { signed, signout } = useAuth();
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -28,7 +30,10 @@ const SearchBar = ({ onSearch }) => {
   
   function handleSubmitShuffle(event) {
     event.preventDefault();
-    alert("Shuffle");
+    if (!signed) {
+      console.log('Usuário não está logado');
+      alert('User not logged in');
+    }
     event.target.reset();
   };
 
