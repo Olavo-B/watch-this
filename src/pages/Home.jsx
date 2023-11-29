@@ -1,20 +1,37 @@
 import SearchBar from '../components/SearchBar';
 import LoginButton from '../components/LoginButton';
 
+import useAuth from "../hooks/UseAuth";
+
+import { Link, useNavigate } from "react-router-dom";
+ 
+
+
 
 
 function Home() {
 
+    const { signed, signout, signin } = useAuth();
+    const navigate = useNavigate();
+
     const handleSearch = (searchTerm) => {
         console.log(`Realizando pesquisa por: ${searchTerm}`);
         alert(`Realizando pesquisa por: ${searchTerm}`);
-        // Lógica de pesquisa aqui...
+
+        navigate('/search-result', { state: { searchTerm } });
       };
     
-      const handleLogin = (email, password) => {
-        // Lógica de login aqui...
+      const handleLogin = () => {
+   
+
+      if (signed) {
+        console.log('Usuário já está logado');
+      } else {
+        signout(); 
       }
-    
+
+    }
+      
     return (
         <div className="App">
         <div className="container">
