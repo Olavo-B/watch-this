@@ -13,13 +13,14 @@ const LoginForm = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setError] = useState("");
 
   const handleLogin = () => {
 
 
     if (!username | !password) {
       setError("Fill in all fields");
+      alert("Fill in all fields")
       return;
     }
 
@@ -30,38 +31,41 @@ const LoginForm = () => {
 
     if (res) {
       setError(res);
+      alert(res)
       return;
     }
 
-    navigate("/home");
+    navigate("/");
   };
 
   return (
     <div>
-      <div className='container-wrapper'>
-        <div className='containerForm'>
-        <input
+      <div className='login-container'>
+    
+        <input 
           type='text'
           placeholder='Username'
           value={username}
           onChange={(e) => [setUsername(e.target.value), setError("")]}
         />
-        </div>
-        <div className='containerForm'>
-        <input
-          type='password'
-          placeholder='Password'
-          value={password}
-          onChange={(e) => [setPassword(e.target.value), setError("")]}
-        />
-        </div>
-    
-          <button className='btn' onClick={handleLogin}>Login</button>
-      </div>
 
-      <div className="icons">
-        <HomeButton />
-      </div>
+          <input
+            type='password'
+            placeholder='Password'
+            value={password}
+            onChange={(e) => [setPassword(e.target.value), setError("")]}
+          />
+    
+          <div className="button-container">
+            <button onClick={handleLogin}>Login</button>
+            <button onClick={() => navigate("/signup")}>Signup</button>
+          </div>
+ 
+       </div>
+
+        <div className="icons">
+          <HomeButton />
+        </div>
     </div>
   );
 };

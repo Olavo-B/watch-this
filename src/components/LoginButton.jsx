@@ -2,19 +2,23 @@
 import React, { useState } from 'react';
 import { FiLogIn, FiUser } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
+
+// import { AuthProvider } from "../context/Auth";
+import useAuth from "../hooks/UseAuth";
+
 import './style/LoginButton.css';
 
 const LoginButton = ({ onLogin }) => {
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const { signed, signout, signin } = useAuth();
+  const [isLoggedIn, setLoggedIn] = useState(signed);
   const navigate = useNavigate();
 
+  
+
   const toggleLogin = () => {
-    if (isLoggedIn) {
-      alert("Logout");
-      setLoggedIn(!isLoggedIn);
-    } else {
-      setLoggedIn(!isLoggedIn);
-    }
+    
+
+
   };
 
   const handleButtonClick = () => {
@@ -24,7 +28,11 @@ const LoginButton = ({ onLogin }) => {
 
     // Navega para a página de login se o usuário não estiver logado
     if (!isLoggedIn) {
+      signout();
       navigate('/login');
+
+    } else {
+      navigate('/catalog');
     }
   };
 
