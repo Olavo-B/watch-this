@@ -16,7 +16,7 @@ function Home() {
 
     const handleSearch = (searchTerm) => {
         console.log(`Realizando pesquisa por: ${searchTerm}`);
-        alert(`Realizando pesquisa por: ${searchTerm}`);
+
 
         navigate('/search-result', { state: { searchTerm } });
       };

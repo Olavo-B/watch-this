@@ -30,7 +30,7 @@ body {
 
 .container .logo {
   width: 100%;
-  max-width: 800px; /* Increase the max-width value to make the image bigger */
+  max-width: 800px;/* Increase the max-width value to make the image bigger */
   height: 60%;
   background-image: url('/public/initial_d_red_sun.svg');
   background-size: cover;
