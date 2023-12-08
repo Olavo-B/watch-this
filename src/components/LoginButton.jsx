@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 // import { AuthProvider } from "../context/Auth";
 import useAuth from "../hooks/UseAuth";
 
-import './style/LoginButton.css';
+import './style/Button.css';
 
 const LoginButton = ({ onLogin }) => {
   const { signed, signout, signin } = useAuth();
@@ -37,7 +37,7 @@ const LoginButton = ({ onLogin }) => {
   };
 
   return (
-    <button className='buttonLogin' onClick={handleButtonClick}>
+    <button className='Button' onClick={handleButtonClick}>
       {isLoggedIn ? <FiUser size={25} color='#FFF' /> : <FiLogIn size={25} color="#FFF" />}
     </button>
   );

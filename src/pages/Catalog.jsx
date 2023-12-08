@@ -1,7 +1,7 @@
 import React from 'react';
 import HomeButton from '../components/HomeButton';
 import LogoutButton from '../components/LogoutButton';
-
+import SettingsButton from '../components/SettingsButton';
 
 const Catalog = () => {
   
@@ -9,8 +9,9 @@ const Catalog = () => {
   return (
     <div>
         <div className='icons'>
-            <LogoutButton />
+            <SettingsButton />
             <HomeButton />
+            <LogoutButton />
         </div>
     </div>
   );

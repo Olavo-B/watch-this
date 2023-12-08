@@ -4,9 +4,9 @@
   width: 300px;
   padding: 16px;
   margin: 0 auto;
-  margin-top: 200px;
+  margin-top: 400px;
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
-  backdrop-filter: blur(25px);
+  backdrop-filter: blur(35px);
 
 }
 

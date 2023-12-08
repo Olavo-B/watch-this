@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import useAuth from "../hooks/UseAuth";
 
-import './style/LoginButton.css';
+import './style/Button.css';
 
 const SignOut = () => {
     const { signed, signout } = useAuth();
@@ -34,7 +34,7 @@ const SignOut = () => {
     };
 
     return (
-        <button className='buttonLogin' onClick={handleButtonClick}>
+        <button className='Button' onClick={handleButtonClick}>
             <FiLogOut size={25} color="#FFF" />
         </button>
     );

@@ -1,5 +1,5 @@
 
-.homeButton {
+.Button {
     background-color: transparent;
     border: 0;
     cursor: pointer;
@@ -8,6 +8,6 @@
 
   }
   
-  .homeButton:hover{
+  .Button:hover{
     transform: scale(1.2);
   }

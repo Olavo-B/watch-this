@@ -2,12 +2,12 @@
 import React from 'react';
 import { FiHome } from 'react-icons/fi';
 import { Link } from 'react-router-dom'; // Import Link for navigation
-import './style/HomeButton.css';
+import './style/Button.css';
 
 const HomeButton = () => {
   return (
     <Link to="/">
-      <button className='homeButton'>
+      <button className='Button'>
         <FiHome size={25} color='#FFF' />
       </button>
     </Link>
