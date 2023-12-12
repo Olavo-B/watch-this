@@ -1,24 +1,14 @@
-.container_search {
-    border-radius: 8px;
-    width: 300px;
-    padding: 16px;
-    margin: 0 auto;
-    margin-top: 200px;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
-    backdrop-filter: blur(25px);
+.media {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
   }
-  
-  .container.slide {
-    transform: translateX(50%);
-  }
-  
-  .info {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  
-  img {
-    cursor: pointer;
-  }
-  
+
+.container .search-result__title h1{
+  font-size: 2em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #FFF;
+}

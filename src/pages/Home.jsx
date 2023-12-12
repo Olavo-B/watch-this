@@ -15,31 +15,27 @@ function Home() {
     const navigate = useNavigate();
 
     const handleSearch = (searchTerm) => {
-        console.log(`Realizando pesquisa por: ${searchTerm}`);
-
-
-        navigate('/search-result', { state: { searchTerm } });
+        console.log(`Realizando pesquisa por: ${searchTerm}`); // For testing purposes only
+        if (searchTerm == ''){
+          alert('Pesquisa vazia')
+        } else {
+          navigate('/search-result', { state: { searchTerm } });
+        }
       };
     
       const handleLogin = () => {
-   
-
       if (signed) {
         console.log('Usuário já está logado');
       } else {
         signout(); 
       }
-
     }
       
     return (
         <div className="App">
         <div className="container">
             <div className="logo"></div>
-
-
             <SearchBar onSearch={handleSearch}/>
-
         </div>
 
         <div className="icons">

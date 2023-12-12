@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { FiSearch, FiShuffle } from 'react-icons/fi';
 import './style/SearchBar.css';
 import useAuth from '../hooks/UseAuth';
+import { useNavigate } from 'react-router-dom';
 
 const SearchBar = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const { signed, signout } = useAuth();
+  const navigate = useNavigate();
+
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -33,6 +36,8 @@ const SearchBar = ({ onSearch }) => {
     if (!signed) {
       console.log('Usuário não está logado');
       alert('User not logged in');
+    } else {
+      navigate('/search-result', { state: { searchTerm: 'random' } })
     }
     event.target.reset();
   };

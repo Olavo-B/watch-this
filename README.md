@@ -16,7 +16,7 @@ This work proposes a minimalist Web system that allows a user who is undecided a
 | Functional search bar                                                                                    |  ✅   |
 | Login page                                                                                               |  ✅    |
 | Sign up page                                                                                             |  ✅    |
-| Search result page                                                                                       |  ⏳    |
+| Search result page                                                                                       |  ✅    |
 | Catalogue page                                                                                           |  ⏳    |
 | User profile                                                                                             |  ⏳    |
 | Edit catalogue                                                                                           |  ⏳    |
@@ -28,7 +28,8 @@ This work proposes a minimalist Web system that allows a user who is undecided a
 | Feature                                                                                                  | Status |
 | -------------------------------------------------------------------------------------------------------- | ------ |
 | Nocturnal mode with background image change                                                              |  ⏳    |
-| Random anime recommendation when clicking on the logo                                                    |  ⏳    |    
+| Random anime recommendation when clicking on the logo                                                    |  ⏳    |
+| Autocomplete search bar                                                                                  |  ⏳    |    
 
 - ✅ = Ready to use
 - ⏳ = In progress
