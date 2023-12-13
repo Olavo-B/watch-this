@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { createUser, fetchUserList } from "../api/userData";
 
 export const AuthContext = createContext({});
 
@@ -37,27 +38,39 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const signup = (email, password) => {
-    const usersStorage = JSON.parse(localStorage.getItem("users_bd"));
+  const  signup = async (email, password) => {
+    // const usersStorage = JSON.parse(localStorage.getItem("users_bd"));
+    const usersStorage = await fetchUserList();
+    const usersInternalStorage = JSON.parse(localStorage.getItem("users_bd"));
+    
 
-    const hasUser = usersStorage?.filter((user) => user.email === email);
+    // console.log(usersStorage);
+
+    const hasUser = usersStorage?.filter((user) => user.email === email) || usersInternalStorage?.filter((user) => user.email === email);
+
+    console.log(hasUser);
 
     if (hasUser?.length) {
-      return "Já tem uma conta com esse E-mail";
+      alert( "Já tem uma conta com esse E-mail");
+      return;
+    } else {
+      console.log("Usuário cadastrado com sucesso");
     }
 
     let newUser;
 
     if (usersStorage) {
-      newUser = [...usersStorage, { email, password }];
+      newUser = [...usersStorage, { email, password}];
     } else {
       newUser = [{ email, password }];
     }
 
+    createUser({ email, password, catalog: []});
     localStorage.setItem("users_bd", JSON.stringify(newUser));
 
     return;
   };
+
 
   const signout = () => {
     setUser(null);

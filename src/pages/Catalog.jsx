@@ -15,6 +15,14 @@ const InfiniteScrollList = () => {
     'Fullmetal Alchemist',
     'Death Note',
     'Dragon Ball Z',
+    'One Piece',
+    'Attack on Titan',
+    'My Hero Academia',
+    'Demon Slayer',
+    'Naruto',
+    'Fullmetal Alchemist',
+    'Death Note',
+    'Dragon Ball Z',
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -26,33 +34,34 @@ const InfiniteScrollList = () => {
     setIsLoading(true);
     setTimeout(() => {
       const newItems = [
-        'One Piece',
-        'Attack on Titan',
-        'My Hero Academia',
-        'Demon Slayer',
-        'Naruto',
-        'Fullmetal Alchemist',
-        'Death Note',
-        'Dragon Ball Z',
-        'One Punch Man',
+        'Durarara!!',
+        'Fairy Tail',
+        'Bleach',
+        'Hunter x Hunter',
+        'Cowboy Bebop',
         'Sword Art Online',
+        'Code Geass',
+        'Steins;Gate',
+        'Durarara!!',
       ];
       setItems((prevItems) => [...prevItems, ...newItems]);
       setIsLoading(false);
     }, 1000);
   };
 
-  const handleScroll = () => {
-    const container = containerRef.current;
-    const { scrollTop, clientHeight, scrollHeight } = container;
-
-    if (scrollTop + clientHeight >= scrollHeight - 10 && scrollTop > 0 && !isLoading) {
-      loadMoreItems();
-    }
-  };
+ 
 
   useEffect(() => {
     const container = containerRef.current;
+    const handleScroll = () => {
+      const container = containerRef.current;
+      const { scrollTop, clientHeight, scrollHeight } = container;
+  
+      if (scrollTop + clientHeight >= scrollHeight - 10 && scrollTop > 0 && !isLoading) {
+        loadMoreItems();
+      }
+    };
+
     container.addEventListener('scroll', handleScroll);
 
     return () => {
@@ -91,7 +100,7 @@ const InfiniteScrollList = () => {
           paddingLeft: '20px',
         }}
       >
-        
+     
         <div
           ref={containerRef}
           style={{
@@ -127,7 +136,7 @@ const InfiniteScrollList = () => {
               <div>
                 <button
                   onClick={() => handleInfoClick(item)}
-                  style={{ marginRight: '8px' }}
+                  style={{ marginRight: '15px' }}
                 >
                   <FiInfo size={18} />
                 </button>
@@ -141,7 +150,6 @@ const InfiniteScrollList = () => {
         </div>
         {selectedItem && (
           <div>
-            {/* Substitua o src por um URL real do vídeo do YouTube */}
             <iframe
               width="1280"
               height="720"

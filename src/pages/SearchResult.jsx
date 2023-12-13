@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import HomeButton from '../components/HomeButton';
-import { getAnimeRecommendation } from '../api/searchEgine';
-import { fetchTrailer, fetchImage, fetchAnime } from '../api/animeData';
+// import { getAnimeRecommendation } from '../api/searchEgine';
+import { fetchTrailer, fetchImage } from '../api/animeData';
 
 const SearchResult = () => {
   const searchTerm = useLocation().state.searchTerm; // <-- get search term from location state
@@ -14,7 +14,8 @@ const SearchResult = () => {
 
       if(searchTerm === 'random') {
         try {
-          const anime = await getAnimeRecommendation('Naruto'); // <-- get anime recommendation based on user catalog
+          // const anime = await getAnimeRecommendation('Naruto'); // <-- get anime recommendation based on user catalog
+          const anime = 'Durarara'
           const url = await fetchTrailer(anime);
           setTrailers(url);
         } catch (error) {
@@ -23,7 +24,8 @@ const SearchResult = () => {
       } else {
         try {
           // const anime = await getAnimeRecommendation(searchTerm); // <-- get anime recommendation
-          const url = await fetchTrailer(searchTerm);
+          const anime = searchTerm
+          const url = await fetchTrailer(anime);
           setTrailers(url);
           
           if (url == null){  // <-- if trailer not found, get image instead
@@ -61,8 +63,8 @@ const SearchResult = () => {
 
 
           {trailers ? 
-                <iframe width="1280" height="720" src={trailers} frameborder="0" style={{borderRadius:'20px'}} allowfullscreen/> :
-                <img src={media} style={{ borderRadius:'30px'}}/>}
+                <iframe width="1280" height="720" title='trailer' src={trailers} frameborder="0" style={{borderRadius:'20px'}} allowfullscreen/> :
+                <img src={media} alt='large_image' style={{ borderRadius:'30px'}}/>}
         </div>
       </div>
     </div>
