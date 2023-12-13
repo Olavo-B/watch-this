@@ -6,6 +6,7 @@
 
 import fastify from 'fastify';
 import fastifyCors from '@fastify/cors';
+import bcrypt from 'bcrypt';
 import { DatabaseMemory } from './database_static_user.js';
 
 
@@ -48,6 +49,31 @@ server.get('/users/:id', (request, reply) => {
 });
 
 /**
+ * POST /users/login
+ * Do login authentication.
+ * @param {Object} request - The request object.
+ * @param {Object} reply - The reply object.
+ * @returns {Object} - The user object.
+ */
+server.post('/users/login', (request, reply) => {
+    const {email, password} = request.body;
+
+    const user = database.getUser(email);
+
+    if (user == null) {
+        return reply.status(404).send();
+    }
+
+    bcrypt.compare(password, user.hash, function(err, result) {
+        if (result) {
+            return reply.status(200).send();
+        } else {
+            return reply.status(404).send();
+        }
+    });
+});
+
+/**
  * POST /users/:id
  * Updates a user by ID.
  * @param {Object} request - The request object.
@@ -58,13 +84,18 @@ server.post('/users/:id', (request, reply) => {
     const { id } = request.params;
     const {email, password, catalog} = request.body;
 
-    database.update(id, 
-        {
-            email,
-            password,
-            catalog,
-        });
+    const saltRounds = 10;
 
+    bcrypt.genSalt(saltRounds, function(err, salt) {
+        bcrypt.hash(password, salt, function(err, hash) {
+            database.update(id,
+                {
+                    email,
+                    hash,
+                    catalog,
+                });
+        });
+    });
     return reply.status(204).send();
 });
 
@@ -94,13 +125,20 @@ server.post('/users/:id/catalog', (request, reply) => {
 server.put('/users', (request, reply) => {
     const {email, password, catalog} = request.body;
 
-    database.create(
-        {
-            email,
-            password,
-            catalog,
-        }
-    );
+    const saltRounds = 10;
+
+    bcrypt.genSalt(saltRounds, function(err, salt) {
+        bcrypt.hash(password, salt, function(err, hash) {
+            database.create(
+                {
+                    email,
+                    hash,
+                    catalog,
+                });
+        });
+    });
+
+  
 
     return reply.status(201).send();
 });

@@ -13,7 +13,7 @@ const LoginForm = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setError] = useState("");
+  const [error, setError] = useState("");
 
   const handleLogin = () => {
 
@@ -27,15 +27,23 @@ const LoginForm = () => {
     console.log(username, password);
 
 
-    const res = signin(username, password);
-
-    if (res) {
-      setError(res);
-      alert(res)
+    signin(username, password)
+    .then((res) => {
+      navigate("/");
+    })
+    .catch((err) => {
+      setError(err);
+      alert(err);
       return;
-    }
+    });
 
-    navigate("/");
+
+    // if (res) {
+    //   setError(res);
+    //   console.log(res);
+    //   return;
+    // }
+    
   };
 
   return (

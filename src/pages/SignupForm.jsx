@@ -30,16 +30,15 @@ const SignupForm = () => {
             return;
         }
 
-        const res = signup(username , password);
-
-        if(res){
-            setError(res);
-            alert(res);
+        signup(username , password)
+        .then ((res) => {
+            navigate('/login');
+        })
+        .catch((err) => {
+            setError(err);
+            alert(err);
             return;
-        }
-
-        navigate('/login');
-
+        });
 
       
     };

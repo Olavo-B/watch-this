@@ -21,6 +21,14 @@ export class DatabaseMemory  {
         });
     }
 
+    getUser(email) {
+        const users = this.list();
+
+        return users.find((user) => {
+            return user.email === email;
+        });
+    }
+
     getCatalog(id) {
         return this.#users.get(id).catalog;
     }

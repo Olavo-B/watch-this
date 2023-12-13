@@ -35,3 +35,16 @@ export async function updateUser(user){
         console.error(error);
     }
 }
+
+export async function handleUserLogin(email, password){
+    try {
+        const response = await axios.post('http://localhost:3333/users/login', {email, password});
+        if (response.status === 200){
+            return true;
+        } else {
+            return false;
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
