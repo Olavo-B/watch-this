@@ -17,7 +17,7 @@ This work proposes a minimalist Web system that allows a user who is undecided a
 | Login page                                                                                               |  ✅    |
 | Sign up page                                                                                             |  ✅    |
 | Search result page                                                                                       |  ✅    |
-| Catalogue page                                                                                           |  ⏳    |
+| Catalogue page                                                                                           |  ✅    |
 | User profile                                                                                             |  ⏳    |
 | Edit catalogue                                                                                           |  ⏳    |
 | Add new anime to catalogue                                                                               |  ⏳    |
@@ -38,6 +38,12 @@ This work proposes a minimalist Web system that allows a user who is undecided a
 # How it works
 
 One of the fundamental parts of this project is the search engine, that is, the method that will be used to generate recommendations. The initial approach involves the use of a technique known as collaborative filtering, implemented based on cosine similarity and using the K-Nearest Neighbors (KNN) algorithm.
+
+# Stack
+
+- [React](https://reactjs.org/)
+- [Jikan API](https://jikan.moe/)
+- [Fastify](https://www.fastify.io/)
 
 # Build Instructions
 

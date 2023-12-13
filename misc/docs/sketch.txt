@@ -1,0 +1,124 @@
+import React from 'react';
+import HomeButton from '../components/HomeButton';
+import LogoutButton from '../components/LogoutButton';
+import SettingsButton from '../components/SettingsButton';
+
+
+const Catalog = () => {
+  
+
+  return (
+    <div>
+        <div className='icons'>
+            <SettingsButton />
+            <HomeButton />
+            <LogoutButton />
+        </div>
+    </div>
+  );
+};
+
+export default Catalog;
+
+_--------------------------------------------------
+
+import React, { useState, useEffect, useRef } from 'react';
+
+const InfiniteScrollList = () => {
+  const [items, setItems] = useState([     'One Piece',
+  'Attack on Titan',
+  'My Hero Academia',
+  'Demon Slayer',
+  'Naruto',
+  'Fullmetal Alchemist',
+  'Death Note',
+  'Dragon Ball Z']);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const containerRef = useRef();
+
+  const loadMoreItems = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      const newItems = [
+        'One Piece',
+        'Attack on Titan',
+        'My Hero Academia',
+        'Demon Slayer',
+        'Naruto',
+        'Fullmetal Alchemist',
+        'Death Note',
+        'Dragon Ball Z',
+        'One Punch Man',
+        'Sword Art Online',
+      ];
+      setItems((prevItems) => [...prevItems, ...newItems]);
+      setIsLoading(false);
+    }, 1000);
+  };
+
+
+  const handleScroll = () => {
+    const container = containerRef.current;
+    const { scrollTop, clientHeight, scrollHeight } = container;
+
+    console.log(scrollTop, clientHeight, scrollHeight);
+
+    if (scrollTop + clientHeight >= scrollHeight - 10 && scrollTop > 0 && !isLoading) {
+      loadMoreItems();
+    }
+  };
+
+  useEffect(() => {
+    const container = containerRef.current;
+    container.addEventListener('scroll', handleScroll);
+
+
+    return () => {
+      container.removeEventListener('scroll', handleScroll);
+    };
+  }, [isLoading]);
+
+  return (
+    <div
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        paddingLeft: '20px',
+      }}
+    >
+      <div
+        ref={containerRef}
+        style={{
+          width: '100vw',
+          maxWidth: '600px',
+          height: '80vh',
+          overflowY: 'auto',
+          padding: '20px',
+          background: 'rgba(255, 255, 255, 0.3)',
+          borderRadius: '30px',
+          backdropFilter: 'blur(10px)',
+        }}
+      >
+        {items.map((item, index) => (
+          <div
+            key={index}
+            style={{
+              marginBottom: '10px',
+              padding: '10px',
+              color: 'white',
+              fontWeight: 'bold',
+            }}
+          >
+            {item}
+          </div>
+        ))}
+        {isLoading && <p>Loading...</p>}
+      </div>
+    </div>
+  );
+};
+
+export default InfiniteScrollList;
