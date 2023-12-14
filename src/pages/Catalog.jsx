@@ -34,7 +34,6 @@ const InfiniteScrollList = () => {
       const fetchUserCatalog = async () => {
         if (user !== undefined) {
           const userResponse = await fetchCatalog(user.id);
-          console.log(userResponse);
           setUserCatalog(userResponse);
         }
       };

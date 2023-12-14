@@ -59,3 +59,7 @@ Content-Type: application/json
 ###
 
 DELETE http://localhost:3333/users/1756e2be-8bd4-4dbd-9953-9b4f4eab0fc2
+
+###
+
+GET http://localhost:3333/recommendations/laputa

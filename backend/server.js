@@ -8,11 +8,13 @@ import fastify from 'fastify';
 import fastifyCors from '@fastify/cors';
 import bcrypt from 'bcrypt';
 import { DatabasePostgres } from './database_postgres.js';
+import { searchEngine } from './search_engine.js';
 
 
 
 const server   = fastify();
 const database = new DatabasePostgres()
+ 
 
 server.register(fastifyCors, {
     // Configurações do CORS
@@ -204,12 +206,19 @@ server.delete('/users/:id/catalog', async (request, reply) => {
     return reply.status(204).send();
 });
 
+server.get('/recommendations/:anime', async (request, reply) => {
+    const { anime } = request.params;
+
+    const result = await searchEngine(anime);
+    return reply.send(result);
+});
+
 /**
  * Starts the server and listens on port 3333.
  */
 
 server.listen({
-    port: 3333
+    port: 3333,
 });
 
 // const start = async () => {

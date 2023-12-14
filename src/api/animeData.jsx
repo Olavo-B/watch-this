@@ -8,7 +8,6 @@ import axios from "axios";
 export async function fetchTrailer(searchTerm){
     try {
         const response = await axios.get(`https://api.jikan.moe/v4/anime?q=${searchTerm}&sfw`);
-        console.log(response.data.data[0]);
         return response.data.data[0].trailer.embed_url;
     } catch (error) {
         console.error(error);
@@ -52,7 +51,6 @@ export async function fetchAnimeList(searchTerm){
 export async function fetchImage(searchTerm){
     try {
         const response = await axios.get(`https://api.jikan.moe/v4/anime?q=${searchTerm}&sfw`);
-        console.log(response.data.data[0]);
         return response.data.data[0].images.jpg.large_image_url;
     } catch (error) {
         console.error(error);
