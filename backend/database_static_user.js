@@ -21,6 +21,10 @@ export class DatabaseMemory  {
         });
     }
 
+    get(id) {
+        return this.#users.get(id);
+    }
+
     getUser(email) {
         const users = this.list();
 

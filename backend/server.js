@@ -7,12 +7,12 @@
 import fastify from 'fastify';
 import fastifyCors from '@fastify/cors';
 import bcrypt from 'bcrypt';
-import { DatabaseMemory } from './database_static_user.js';
+import { DatabasePostgres } from './database_postgres.js';
 
 
 
 const server   = fastify();
-const database = new DatabaseMemory()
+const database = new DatabasePostgres()
 
 server.register(fastifyCors, {
     // Configurações do CORS
@@ -27,25 +27,40 @@ server.register(fastifyCors, {
  * @param {Object} reply - The reply object.
  * @returns {Array} - An array of user objects.
  */
-server.get('/users', (request, reply) => {
-    const users = database.list();
+server.get('/users', async (request, reply) => {
+    const users = await database.list();
 
     return reply.send(users);
 });
 
 /**
  * GET /users/:id
- * Retrieves a specific user by ID.
+ * Retrieves a user by ID.
  * @param {Object} request - The request object.
  * @param {Object} reply - The reply object.
  * @returns {Object} - The user object.
  */
-server.get('/users/:id', (request, reply) => {
+server.get('/users/:id', async (request, reply) => {
     const { id } = request.params;
 
-    const user = database.getCatalog(id);
+    const user = await database.get(id);
 
-    return reply.send(user);
+    return reply.send(user[0]);
+});
+
+/**
+ * GET /users/:id
+ * Retrieves catalog of a user by ID.
+ * @param {Object} request - The request object.
+ * @param {Object} reply - The reply object.
+ * @returns {Object} - The user object.
+ */
+server.get('/users/:id/catalog',async (request, reply) => {
+    const { id } = request.params;
+
+    const user = await database.getCatalog(id);
+
+    return reply.send(user[0]["catalog"]);
 });
 
 /**
@@ -55,24 +70,37 @@ server.get('/users/:id', (request, reply) => {
  * @param {Object} reply - The reply object.
  * @returns {Object} - The user object.
  */
-server.post('/users/login', (request, reply) => {
-    const {email, password} = request.body;
-
-    const user = database.getUser(email);
-
-    if (user == null) {
+server.post('/users/login', async (request, reply) => {
+    const { email, password } = request.body;
+  
+    try {
+      const user = await database.getUser(email);
+  
+  
+      if (!user) {
         return reply.status(404).send();
+      }
+  
+      const result = await comparePasswords(password, user[0].hash);
+  
+      return reply.send(result);
+    } catch (error) {
+      console.error('Error during login:', error);
+      return reply.status(500).send();
     }
-
-    bcrypt.compare(password, user.hash, function(err, result) {
-        if (result) {
-            return reply.status(200).send();
+  });
+  
+function comparePasswords(password, hashedPassword) {
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(password, hashedPassword, (err, result) => {
+        if (err) {
+          reject(err);
         } else {
-            return reply.status(404).send();
+          resolve(result);
         }
+      });
     });
-});
-
+  }
 /**
  * POST /users/:id
  * Updates a user by ID.
@@ -87,8 +115,8 @@ server.post('/users/:id', (request, reply) => {
     const saltRounds = 10;
 
     bcrypt.genSalt(saltRounds, function(err, salt) {
-        bcrypt.hash(password, salt, function(err, hash) {
-            database.update(id,
+        bcrypt.hash(password, salt, async function(err, hash) {
+            await database.update(id,
                 {
                     email,
                     hash,
@@ -106,11 +134,13 @@ server.post('/users/:id', (request, reply) => {
  * @param {Object} reply - The reply object.
  * @returns {Object} - The updated user object.
  */
-server.post('/users/:id/catalog', (request, reply) => {
+server.post('/users/:id/catalog', async (request, reply) => {
     const { id } = request.params;
     const anime  = request.body;
 
-    database.updateCatalog(id, anime["catalog"]);
+    console.log(anime["catalog"]);
+
+    await database.updateCatalog(id, anime["catalog"]);
 
     return reply.status(204).send();
 });
@@ -128,8 +158,8 @@ server.put('/users', (request, reply) => {
     const saltRounds = 10;
 
     bcrypt.genSalt(saltRounds, function(err, salt) {
-        bcrypt.hash(password, salt, function(err, hash) {
-            database.create(
+        bcrypt.hash(password, salt, async function(err, hash) {
+            await database.create(
                 {
                     email,
                     hash,
@@ -150,10 +180,10 @@ server.put('/users', (request, reply) => {
  * @param {Object} reply - The reply object.
  * @returns {Object} - The deleted user object.
  */
-server.delete('/users/:id', (request, reply) => {
+server.delete('/users/:id', async (request, reply) => {
     const { id } = request.params;
 
-    database.delete(id);
+    await database.delete(id);
 
     return reply.status(204).send();
 });
@@ -165,11 +195,11 @@ server.delete('/users/:id', (request, reply) => {
  * @param {Object} reply - The reply object.
  * @returns {Object} - The updated user object.
  */
-server.delete('/users/:id/catalog', (request, reply) => {
+server.delete('/users/:id/catalog', async (request, reply) => {
     const { id } = request.params;
     const { anime }   = request.body;
 
-    database.deleteAnime(id, anime["catalog"]);
+    await database.deleteAnime(id, anime["catalog"]);
 
     return reply.status(204).send();
 });

@@ -2,12 +2,30 @@ PUT http://localhost:3333/users
 Content-Type: application/json
 
 {
-  "email" : "Mario",
+  "email" : "Joao",
   "password": "123456",
   "catalog" : [
     "Naruto",
     "Dragon Ball",
-    "One Piece"
+    "One Piece",
+    "Bleach",
+    "Death Note",
+    "Fullmetal Alchemist",
+    "Hunter x Hunter",
+    "Fairy Tail",
+    "Boku no Hero Academia",
+    "Durara!!",
+    "Sword Art Online",
+    "Tokyo Ghoul",
+    "Shingeki no Kyojin",
+    "Boku dake ga Inai Machi",
+    "Noragami",
+    "Nanatsu no Taizai",
+    "Ao no Exorcist",
+    "Barakamon",
+    "Kuroko no Basket",
+    "Haikyuu!!",
+    "Ansatsu Kyoushitsu"
   ]
 }
 
@@ -15,13 +33,18 @@ Content-Type: application/json
 
 GET http://localhost:3333/users
 
+
 ###
 
-POST http://localhost:3333/users/1541cf52-3080-4d5f-9dbf-999d558cefa1/catalog
+GET http://localhost:3333/users/64501cc2-6047-4232-96d2-1f621f259bf4/catalog
+
+###
+
+POST http://localhost:3333/users/64501cc2-6047-4232-96d2-1f621f259bf4/catalog
 Content-Type: application/json
 
 {
-  "catalog": "Bleach"
+  "catalog": "Catalog Put"
 }
 
 ###
@@ -32,3 +55,7 @@ Content-Type: application/json
 {
   "catalog": "Bleach"
 }
+
+###
+
+DELETE http://localhost:3333/users/1756e2be-8bd4-4dbd-9953-9b4f4eab0fc2

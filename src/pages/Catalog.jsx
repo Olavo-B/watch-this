@@ -1,93 +1,86 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FiTrash2, FiInfo } from 'react-icons/fi';
+
+import useAuth from "../hooks/UseAuth";
+
 import { fetchTrailer, fetchImage } from '../api/animeData';
+import { fetchCatalog } from '../api/userData';
+
+
 import HomeButton from '../components/HomeButton';
 import LogoutButton from '../components/LogoutButton';
 import SettingsButton from '../components/SettingsButton';
 
 const InfiniteScrollList = () => {
-  const [items, setItems] = useState([
-    'One Piece',
-    'Attack on Titan',
-    'My Hero Academia',
-    'Demon Slayer',
-    'Naruto',
-    'Fullmetal Alchemist',
-    'Death Note',
-    'Dragon Ball Z',
-    'One Piece',
-    'Attack on Titan',
-    'My Hero Academia',
-    'Demon Slayer',
-    'Naruto',
-    'Fullmetal Alchemist',
-    'Death Note',
-    'Dragon Ball Z',
-  ]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [media, setMedia] = useState(''); // <-- state for trailer URL
-
-  const containerRef = useRef();
-
-  const loadMoreItems = () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      const newItems = [
-        'Durarara!!',
-        'Fairy Tail',
-        'Bleach',
-        'Hunter x Hunter',
-        'Cowboy Bebop',
-        'Sword Art Online',
-        'Code Geass',
-        'Steins;Gate',
-        'Durarara!!',
-      ];
-      setItems((prevItems) => [...prevItems, ...newItems]);
-      setIsLoading(false);
-    }, 1000);
-  };
-
- 
-
-  useEffect(() => {
-    const container = containerRef.current;
-    const handleScroll = () => {
-      const container = containerRef.current;
-      const { scrollTop, clientHeight, scrollHeight } = container;
+    const { user } = useAuth();
+    const [userCatalog, setUserCatalog] = useState([]);
+    const [items, setItems] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [media, setMedia] = useState('');
   
-      if (scrollTop + clientHeight >= scrollHeight - 10 && scrollTop > 0 && !isLoading) {
-        loadMoreItems();
+    const containerRef = useRef();
+  
+    const loadMoreItems = () => {
+      setIsLoading(true);
+      setTimeout(() => {
+        const newItems = userCatalog.slice(items.length, items.length + 10);
+        setItems((prevItems) => [...prevItems, ...newItems]);
+        setIsLoading(false);
+      }, 1000);
+    };
+  
+    useEffect(() => {
+      const fetchUserCatalog = async () => {
+        if (user !== undefined) {
+          const userResponse = await fetchCatalog(user.id);
+          console.log(userResponse);
+          setUserCatalog(userResponse);
+        }
+      };
+  
+      fetchUserCatalog();
+    }, [user]);
+  
+    useEffect(() => {
+      setItems(userCatalog.slice(0, 15));
+    }, [userCatalog]);
+  
+    useEffect(() => {
+      const container = containerRef.current;
+  
+      const handleScroll = () => {
+        const { scrollTop, clientHeight, scrollHeight } = container;
+  
+        if (scrollTop + clientHeight >= scrollHeight - 10 && scrollTop > 0 && !isLoading) {
+          loadMoreItems();
+        }
+      };
+  
+      container.addEventListener('scroll', handleScroll);
+  
+      return () => {
+        container.removeEventListener('scroll', handleScroll);
+      };
+  
+    }, [isLoading]);
+  
+    const handleInfoClick = async (item) => {
+      const url = await fetchTrailer(item);
+      if (url == null) {
+        const image = await fetchImage(item);
+        console.log('Anime trailer not found! ' + item + ' image: ' + image);
+        setMedia(image);
+      } else {
+        setMedia(url);
       }
+      setSelectedItem(item);
     };
-
-    container.addEventListener('scroll', handleScroll);
-
-    return () => {
-      container.removeEventListener('scroll', handleScroll);
+  
+    const handleDeleteClick = async (item) => {
+      setItems((prevItems) => prevItems.filter((prevItem) => prevItem !== item));
+      setSelectedItem(null);
     };
-  }, [isLoading]);
-
-  const handleInfoClick = async (item) => {
-    // Lógica para lidar com o clique no botão de informação
-    const url = await fetchTrailer(item);
-    if (url == null){  // <-- if trailer not found, get image instead
-      const image = await fetchImage(item);
-      console.log('Anime trailer not found! ' + item + ' image: ' + image);
-      setMedia(image);
-
-    } else {
-      setMedia(url);
-    }
-    setSelectedItem(item);
-  };
-
-  const handleDeleteClick = (item) => {
-    // Lógica para deletar o item
-    setItems((prevItems) => prevItems.filter((prevItem) => prevItem !== item));
-    setSelectedItem(null); // Reinicia o vídeo quando o item é excluído
-  };
 
   return (
     <div>
