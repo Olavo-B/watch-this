@@ -18,9 +18,9 @@ This work proposes a minimalist Web system that allows a user who is undecided a
 | Sign up page                                                                                             |  ✅    |
 | Search result page                                                                                       |  ✅    |
 | Catalogue page                                                                                           |  ✅    |
-| User profile                                                                                             |  ⏳    |
-| Edit catalogue                                                                                           |  ⏳    |
-| Add new anime to catalogue                                                                               |  ⏳    |
+| User profile                                                                                             |  ✅    |
+| Edit catalogue                                                                                           |  ✅    |
+| Add new anime to catalogue                                                                               |  ✅    |
 | Make search engine  - backend                                                                            |  ✅    |
 | Make database - backend                                                                                  |  ✅    |
 
