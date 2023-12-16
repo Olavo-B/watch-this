@@ -112,7 +112,9 @@ function comparePasswords(password, hashedPassword) {
  */
 server.post('/users/:id', (request, reply) => {
     const { id } = request.params;
-    const {email, password, catalog} = request.body;
+    const {password } = request.body;
+
+    console.log(password);
 
     const saltRounds = 10;
 
@@ -120,9 +122,7 @@ server.post('/users/:id', (request, reply) => {
         bcrypt.hash(password, salt, async function(err, hash) {
             await database.update(id,
                 {
-                    email,
                     hash,
-                    catalog,
                 });
         });
     });
@@ -140,9 +140,11 @@ server.post('/users/:id/catalog', async (request, reply) => {
     const { id } = request.params;
     const anime  = request.body;
 
-    console.log(anime["catalog"]);
+    console.log(anime);
 
-    await database.updateCatalog(id, anime["catalog"]);
+    for (let i = 0; i < anime["catalog"].length; i++) {
+        await database.updateCatalog(id, anime["catalog"][i]);
+    }
 
     return reply.status(204).send();
 });

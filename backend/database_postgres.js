@@ -48,7 +48,6 @@ export class DatabasePostgres  {
     async create(user) {
 
         const id = randomUUID();
-        const catalog = user.catalog.map((anime) => `${anime}`).join(', ');
 
         await sql`INSERT INTO users (id, email, hash, catalog) VALUES (${id}, ${user.email}, ${user.hash}, ${user.catalog})`;
   
@@ -57,14 +56,14 @@ export class DatabasePostgres  {
 
     async update(id, user) {
         
-        await sql`UPDATE users SET email = ${user.email}, hash = ${user.hash}, catalog = ${user.catalog} WHERE id = ${id}`;
+        await sql`UPDATE users SET hash = ${user.hash} WHERE id = ${id}`;
 
     }
 
     async updateCatalog(id, anime) {
 
         const user = await sql`SELECT * FROM users WHERE id = ${id}`;
-        
+            
         user[0].catalog.push(anime);
 
         await sql`UPDATE users SET catalog = ${user[0].catalog} WHERE id = ${id}`;

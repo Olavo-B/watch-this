@@ -16,6 +16,25 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:3333/users/b25cd2fe-eec9-4ef7-aa7f-b7e008026460
+Content-Type: application/json
+
+{
+  "email" : "Calma",
+  "password": "123123",
+  "catalog" : [
+    "Naruto",
+    "Dragon Ball",
+    "One Piece",
+    "Bleach",
+    "Death Note",
+    "Haikyuu!!",
+    "Ansatsu Kyoushitsu"
+  ]
+
+}
+
+###
 
 GET http://localhost:3333/users
 
@@ -30,7 +49,10 @@ POST http://localhost:3333/users/64501cc2-6047-4232-96d2-1f621f259bf4/catalog
 Content-Type: application/json
 
 {
-  "catalog": "Catalog Put"
+  "catalog": ["Bleach",
+  "Ao no Exorcist",
+  "Boku no Hero Academia"
+  ]
 }
 
 ###

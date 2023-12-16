@@ -60,9 +60,20 @@ export async function createUser(user){
  * @param {Object} user - The user object to be updated.
  * @returns {Promise<Object>} The updated user object.
  */
-export async function updateUser(user){
+export async function updateUser(id, user){
     try {
-        const response = await axios.post(`http://localhost:3333/users/${user.id}`, user);
+        const response = await axios.post(`http://localhost:3333/users/${id}`, user);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function updateCatalog(id, anime){
+    console.log(anime);
+    try {
+        const response = await axios.post(`http://localhost:3333/users/${id}/catalog`, 
+        anime);
         return response.data;
     } catch (error) {
         console.error(error);
