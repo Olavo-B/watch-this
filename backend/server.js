@@ -199,7 +199,9 @@ server.delete('/users/:id', async (request, reply) => {
  */
 server.delete('/users/:id/catalog', async (request, reply) => {
     const { id } = request.params;
-    const { anime }   = request.body;
+    const anime   = request.body;
+
+    console.log(anime);
 
     await database.deleteAnime(id, anime["catalog"]);
 

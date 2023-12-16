@@ -21,15 +21,15 @@ This work proposes a minimalist Web system that allows a user who is undecided a
 | User profile                                                                                             |  ⏳    |
 | Edit catalogue                                                                                           |  ⏳    |
 | Add new anime to catalogue                                                                               |  ⏳    |
-| Make search engine  - backend                                                                            |  ⏳    |
-| Make database - backend                                                                                  |  ⏳    |
+| Make search engine  - backend                                                                            |  ✅    |
+| Make database - backend                                                                                  |  ✅    |
 
 ### Optional features
 | Feature                                                                                                  | Status |
 | -------------------------------------------------------------------------------------------------------- | ------ |
-| Nocturnal mode with background image change                                                              |  ⏳    |
-| Random anime recommendation when clicking on the logo                                                    |  ⏳    |
-| Autocomplete search bar                                                                                  |  ⏳    |    
+| Nocturnal mode with background image change                                                              |  🙏🏻    |
+| Random anime recommendation when clicking on the logo                                                    |  🙏🏻    |
+| Autocomplete search bar                                                                                  |  🙏🏻    |    
 
 - ✅ = Ready to use
 - ⏳ = In progress
@@ -44,6 +44,7 @@ One of the fundamental parts of this project is the search engine, that is, the 
 - [React](https://reactjs.org/)
 - [Jikan API](https://jikan.moe/)
 - [Fastify](https://www.fastify.io/)
+- [PostgreSQL](https://www.postgresql.org/)
 
 # Build Instructions
 
@@ -52,7 +53,7 @@ If you would like to work on the open source code, please do feel free to submit
 To get started, first _fork_ the repo to your personal github repos, then run the following commands:
 
 ```shell
-git clone 
+git clone https://github.com/Olavo-B/watch-this.git
 ```
 
 ```shell
@@ -60,7 +61,8 @@ npm install
 ```
 
 ```shell
-npm run dev
+npm start
+```
 ```
 
 # <a href="#privacy">Privacy</a>

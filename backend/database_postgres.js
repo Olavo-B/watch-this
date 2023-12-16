@@ -81,10 +81,11 @@ export class DatabasePostgres  {
 
         const user = await sql`SELECT * FROM users WHERE id = ${id}`;
 
-        user.catalog = user.catalog.filter((animeItem) => {
+
+        user[0].catalog = user[0].catalog.filter((animeItem) => {
             return animeItem !== anime;
         });
 
-        await sql`UPDATE users SET catalog = ${user.catalog} WHERE id = ${id}`;
+        await sql`UPDATE users SET catalog = ${user[0].catalog} WHERE id = ${id}`;
     }
 }

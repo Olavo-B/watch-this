@@ -83,6 +83,18 @@ export async function deleteUser(id){
     }
 }
 
+export async function deleteAnime(id, anime){
+    try {
+        const response = await axios.delete(`http://localhost:3333/users/${id}/catalog`, {
+            data: anime, // or params: anime or other configuration based on your API
+          });
+          
+        return response.status;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 /**
  * Handles user login.
  * @param {string} email - The user's email.

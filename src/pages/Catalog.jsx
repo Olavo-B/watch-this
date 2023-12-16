@@ -4,7 +4,7 @@ import { FiTrash2, FiInfo } from 'react-icons/fi';
 import useAuth from "../hooks/UseAuth";
 
 import { fetchTrailer, fetchImage } from '../api/animeData';
-import { fetchCatalog } from '../api/userData';
+import { fetchCatalog, deleteAnime } from '../api/userData';
 
 
 import HomeButton from '../components/HomeButton';
@@ -77,10 +77,21 @@ const InfiniteScrollList = () => {
     };
   
     const handleDeleteClick = async (item) => {
+      // Remove the item from the state
       setItems((prevItems) => prevItems.filter((prevItem) => prevItem !== item));
+    
+      try {
+        // Call deleteAnime with the user ID and anime data
+        await deleteAnime(user.id, {catalog : item});
+      } catch (error) {
+        console.error('Error deleting anime:', error);
+        // Handle the error as needed
+      }
+    
+      // Additional logic after the deletion (e.g., resetting selectedItem)
       setSelectedItem(null);
     };
-
+    
   return (
     <div>
       <div
