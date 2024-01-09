@@ -2,7 +2,8 @@
 
 This work proposes a minimalist Web system that allows a user who is undecided about what to watch to receive quick recommendations of Anime based on their taste or other animations. The proposed name is Watch This!
 
-(home)[https://raw.githubusercontent.com/Olavo-B/watch-this/master/misc/img/home.jpeg]
+
+![home](https://raw.githubusercontent.com/Olavo-B/watch-this/master/misc/img/home.jpeg)
 
 
 # Version
